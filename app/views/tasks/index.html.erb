@@ -1,0 +1,7 @@
+<h1>To Do</h1>
+
+<%= render 'form', task: @task %>
+
+<% @tasks.each do |task| %>
+    <h2> <%= task.title%></h2>
+<% end %>
