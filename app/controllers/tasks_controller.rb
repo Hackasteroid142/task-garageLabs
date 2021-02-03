@@ -33,9 +33,20 @@ class TasksController < ApplicationController
     end 
   end
 
-
   def destroy
     @task.destroy
+    redirect_to root_path
+  end
+
+  def complete
+    @task = Task.find(params[:id])
+    @task.update_attribute(:completed, true)
+    redirect_to root_path
+  end
+
+  def incomplete
+    @task = Task.find(params[:id])
+    @task.update_attribute(:completed, false)
     redirect_to root_path
   end
 
