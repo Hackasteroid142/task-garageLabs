@@ -1,0 +1,15 @@
+<%= form_with(model: task, local: true) do |form| %>
+
+<h2>Crear Tarea</h2>
+
+<div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+</div>
+
+<div class="actions">
+    <%= form.submit %>
+</div>
+
+
+<% end %>
