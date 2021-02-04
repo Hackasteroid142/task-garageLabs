@@ -1,25 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>To Do</h1>
 
-<h1>To Do</h1>
+            <h3>Crear Tarea</h3>
 
-<h2>Crear Tarea</h2>
+            <%= render 'form', task: @task %>
 
-<%= render 'form', task: @task %>
+            <h3>Sus tareas son las siguientes</h3>
 
-<h2>Sus tareas son las siguientes</h2>
+            <% @tasks.each do |task| %>
+                <% if task.completed?%>
+                    <li> <%= task.title%> 
+                    <%= link_to "Editar", edit_task_url(task)%>
+                    <%= link_to "Borrar", task_url(task), method: :delete, data:{confirm: "¿Estas seguro?" }, class:"b-button"%>
+                    <%= link_to "Completar", complete_task_url(task), method: :patch, class:"a-button"%>
+                    </li> 
+                <% else %>
+                    <li class="data-task"> <%= task.title%> 
+                    <%= link_to "Borrar", task_url(task), method: :delete, data:{confirm: "¿Estas seguro?" }, class:"b-button"%>
+                    <%= link_to "No Completada", incomplete_task_url(task), method: :patch%>
+                    </li> 
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
 
-<% @tasks.each do |task| %>
-    <% if task.completed?%>
-        
-        <li> <%= task.title%> 
-        <%= link_to "Editar", edit_task_url(task)%>
-        <%= link_to "Borrar", task_url(task), method: :delete, data:{confirm: "Estas seguro?" }%>
-        <%= link_to "Completar", complete_task_url(task), method: :patch%>
-        </li> 
-    <% else %>
-    <p><%= task.completed? %></p>
-        <li style="opacity:0.5;"> <%= task.title%> 
-        <%= link_to "Borrar", task_url(task), method: :delete, data:{confirm: "Estas seguro?" }%>
-        <%= link_to "no Completada", incomplete_task_url(task), method: :patch%>
-        </li> 
-    <% end %>
-<% end %>
