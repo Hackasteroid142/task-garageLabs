@@ -1,3 +1,19 @@
+# Se definen los distintos roles para el despliegue, que pueden ser distintas instancias de amazon.
+role :app, %w{ubuntu@18.222.221.204}
+role :web, %w{ubuntu@18.222.221.204}
+role :db,  %w{ubuntu@18.222.221.204}
+
+# Se definen los distintos servidores, asociados a un rol para hacer el despliegue.
+set :user, "ubuntu"
+server "18.222.221.204", roles: %w{web}
+
+# Se indica la ubicación de la llave.pem descargada desde amazon. Esto para poder hacer la autenticación por SSH
+set :ssh_options, {
+    forward_agent: true,
+    keys: ["~/.ssh/todo.pem"],
+    user: 'ubuntu'
+}
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
