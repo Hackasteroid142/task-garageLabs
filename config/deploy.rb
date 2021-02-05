@@ -13,7 +13,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :deploy_to, "/var/www/todo"
 
 set :rvm_type, :user
-set :rvm_ruby_version, '2.5.3'
+set :rvm_ruby_version, '2.5.1'
 set :rvm_binary, '~/.rvm/bin/rvm'
 set :rvm_bin_path, "$HOME/bin"
 set :default_env, { rvm_bin_path: '~/.rvm/bin' }
