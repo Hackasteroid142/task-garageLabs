@@ -85,4 +85,4 @@ production:
   <<: *default
   database: todo_production
   host: localhost
-  password: <%= ENV['TODO_DATABASE_PASSWORD'] %>
+
