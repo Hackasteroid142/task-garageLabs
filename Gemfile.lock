@@ -249,7 +249,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootsnap (>= 1.4.4)
+  bootsnap
   bootstrap (~> 4.0)
   byebug
   capistrano (~> 3.0)
