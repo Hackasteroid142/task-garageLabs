@@ -39,6 +39,9 @@ group :development, :test do
   gem 'capistrano-bundler', '1.1.1'
   gem 'capistrano-rails', '1.1.3'
   gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+  gem 'rspec-rails'
+  gem 'rspec-json_expectations'
+  gem 'rubocop-rspec'
 end
 
 group :development do
@@ -58,6 +61,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'rspec-sidekiq'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
