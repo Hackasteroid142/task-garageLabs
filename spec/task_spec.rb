@@ -18,15 +18,18 @@ describe 'Task', type: :feature do
             visit root_path
             fill_in 'title', with: 'Prueba'
             click_button 'Enviar'
+            fill_in 'title', with: 'Prueba 2'
+            click_button 'Enviar'
+            find('li', match: :first).click_link_or_button('Completar')
         end
 
         it 'delete task', js: true do
             expect(page).to have_current_path(root_path)
             expect(page).to have_selector(:link_or_button, 'Borrar')
-            click_link_or_button 'Borrar'
-
+            find('li.task',text: 'Prueba').click_link_or_button('Borrar')
+            
             page.driver.browser.switch_to.alert.accept
-            expect(page).not_to have_content('Prueba')
+            expect(page).not_to have_content('Prueba', exact: true)
         end
 
         it 'confirm task', js: true do 
@@ -37,6 +40,29 @@ describe 'Task', type: :feature do
             expect(page).to have_current_path(root_path)
             expect(page).to have_content('Prueba')
             expect(page).to have_css('li.data-task')
+        end
+        
+        it 'uncheck task', js: true do
+            expect(page).to have_current_path(root_path)
+            expect(page).to have_selector(:link_or_button, 'No Completada')
+            find('li.data-task',text: 'Prueba').click_link_or_button('No Completada')
+            expect(page).to have_content('Prueba 2')
+            expect(page).not_to have_css('li.data-task')
+        end
+
+        it 'edit task', js: true do
+            expect(page).to have_current_path(root_path)
+            expect(page).to have_content('Prueba')
+            #test = find('li.task', text: 'Prueba')
+            expect(page).to have_selector(:link_or_button, 'Editar')
+            find('li.task',text: 'Prueba').click_link_or_button('Editar')
+            
+            #expect(page).to have_current_path(edit_task_path(task))
+
+            find_field('task[title]')
+            fill_in 'task[title]', with: 'Prueba 3'
+            click_button 'Enviar'
+            expect(page).to have_current_path(root_path)
         end
     end
 end

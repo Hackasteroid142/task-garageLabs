@@ -11,7 +11,7 @@
 
             <% @tasks.each do |task| %>
                 <% if task.completed?%>
-                    <li> <%= task.title%> 
+                    <li class="task"> <%= task.title%> 
                     <%= link_to "Editar", edit_task_url(task)%>
                     <%= link_to "Borrar", task_url(task), method: :delete, data:{confirm: "¿Estas seguro?" }, class:"b-button"%>
                     <%= link_to "Completar", complete_task_url(task), method: :patch, class:"a-button"%>
