@@ -16,8 +16,9 @@ describe 'Task', type: :feature do
     context 'task page with tasks' do
         before do
             visit root_path
-            fill_in 'title', with: 'Prueba'
-            click_button 'Enviar'
+            @test = Task.create(title: 'Prueba')
+            #fill_in 'title', with: test.title
+            #click_button 'Enviar'
             fill_in 'title', with: 'Prueba 2'
             click_button 'Enviar'
             find('li', match: :first).click_link_or_button('Completar')
@@ -53,14 +54,13 @@ describe 'Task', type: :feature do
         it 'edit task', js: true do
             expect(page).to have_current_path(root_path)
             expect(page).to have_content('Prueba')
-            #test = find('li.task', text: 'Prueba')
             expect(page).to have_selector(:link_or_button, 'Editar')
             find('li.task',text: 'Prueba').click_link_or_button('Editar')
             
-            #expect(page).to have_current_path(edit_task_path(task))
+            expect(page).to have_current_path(edit_task_path(@test))
 
             find_field('task[title]')
-            fill_in 'task[title]', with: 'Prueba 3'
+            fill_in 'task[title]', with: 'Prueba 4'
             click_button 'Enviar'
             expect(page).to have_current_path(root_path)
         end
