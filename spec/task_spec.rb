@@ -2,6 +2,14 @@ require 'rails_helper'
 
 describe 'Task', type: :feature do
     context 'task page with no tasks' do
+        before do
+            visit root_path
+            @test = Task.create(title: 'Prueba')
+            fill_in 'title', with: 'Prueba 2'
+            click_button 'Enviar'
+            find('li', match: :first).click_link_or_button('Completar')
+        end
+
         it 'add task', js:true do
             visit root_path
             expect(page).to have_current_path(root_path)
@@ -12,18 +20,7 @@ describe 'Task', type: :feature do
             expect(page).to have_current_path(root_path)
             expect(page).to have_content('Prueba')
         end
-    end
-    context 'task page with tasks' do
-        before do
-            visit root_path
-            @test = Task.create(title: 'Prueba')
-            #fill_in 'title', with: test.title
-            #click_button 'Enviar'
-            fill_in 'title', with: 'Prueba 2'
-            click_button 'Enviar'
-            find('li', match: :first).click_link_or_button('Completar')
-        end
-
+        
         it 'delete task', js: true do
             expect(page).to have_current_path(root_path)
             expect(page).to have_selector(:link_or_button, 'Borrar')
